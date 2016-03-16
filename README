@@ -1,0 +1,99 @@
+This is a demo of some crypto algos.
+
+A simple Galois based Linear Feedback Shift Register (LFSR).
+LFSR are used in computer industry for many applications, like PRNG
+One example application is a stream cipher, which is also provided.
+
+RC4 is also provided, other algos could follow
+
+
+Provided using the PHP language PHP >= 8.1
+Also using C, as PHP extension PHP >= 7.0
+
+
+
+LFSR Example :
+--------------
+
+lfsr_demo.php seed degree
+
+> ./lfsr_demo.php "my secret" 7
+
+**Simple Galois LFSR, degree 7 (127 states m-sequence)**
+Used register bits for feedback : 7 6
+Deducted Feedback function      : 1100000 (0X60) 
+
+
+Your initial state is : 00000000000000000000001110001100 (908)
+Let's now start the Linear Feedback Shift Register
+
+
+[Iteration] [-------Internal Register -------] [PRandom bit]
+    |                      |                        |       
+    v                      v                        v       
+         0 - 00000000000000000000001110001100     [ 0 ]
+         1 - 00000000000000000000000111000110     [ 0 ]
+         2 - 00000000000000000000000011100011     [ 1 ]
+         3 - 00000000000000000000000000010001     [ 1 ]
+         4 - 00000000000000000000000001101000     [ 0 ]
+         5 - 00000000000000000000000000110100     [ 0 ]
+         6 - 00000000000000000000000000011010     [ 0 ]
+         7 - 00000000000000000000000000001101     [ 1 ]
+
+         ...
+
+
+StreamCipher example :
+----------------------
+
+stream_cipher_demo.php seed
+
+> echo "bar baz an burz" | ./stream_cipher_demo.php "wow, that is secret"
+
+Your input data is 'bar baz an burz'
+We are now going to crypt it byte per byte 
+
+
+Random byte got from LFSR : 11111100
+
+Next byte from your input : 01100010 (b)
+
+------------------------------------
+
+XORed crypted output byte : 10011110
+
+
+
+Random byte got from LFSR : 11111101
+
+Next byte from your input : 01100001 (a)
+
+------------------------------------
+
+XORed crypted output byte : 10011100
+
+
+
+Random byte got from LFSR : 11111101
+
+Next byte from your input : 01110010 (r)
+
+------------------------------------
+
+XORed crypted output byte : 10001111
+
+... ...
+
+
+RC4 example :
+-------------
+
+> ./RC4_demo.php "my secret key is foobar"
+
+PRB : 99
+PRB : C4
+PRB : 2A
+PRB : 0F
+PRB : 5B
+PRB : BB
+...
